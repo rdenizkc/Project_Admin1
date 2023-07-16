@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <assignments>
+        <name>Update_Version_1_Checkbox_on_Contact</name>
+        <label>Update Version 1 Checkbox on Contact</label>
+        <locationX>799</locationX>
+        <locationY>681</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Contacts.Version_1_Check_Box_Update__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Version_1_Checkbox_on_Contact</targetReference>
+        </connector>
+    </assignments>
+    <environments>Default</environments>
+    <interviewLabel>Update Hidden Checkbox {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update Hidden Checkbox</label>
+    <loops>
+        <name>Loop_Through_Contacts</name>
+        <label>Loop Through Contacts</label>
+        <locationX>446</locationX>
+        <locationY>544</locationY>
+        <collectionReference>Get_Contact_Records</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Update_Version_1_Checkbox_on_Contact</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Contact_Records</name>
+        <label>Get Contact Records</label>
+        <locationX>446</locationX>
+        <locationY>258</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Through_Contacts</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Check_Version_1_Checkbox_on_Contact</targetReference>
+        </faultConnector>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Contact</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Check_Version_1_Checkbox_on_Contact</name>
+        <label>Check Version 1 Checkbox on Contact</label>
+        <locationX>802</locationX>
+        <locationY>264</locationY>
+        <connector>
+            <targetReference>Loop_Through_Contacts</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Update_Version_1_Checkbox_on_Contact</targetReference>
+        </faultConnector>
+        <inputReference>Loop_Through_Contacts</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>320</locationX>
+        <locationY>51</locationY>
+        <connector>
+            <targetReference>Get_Contact_Records</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>
