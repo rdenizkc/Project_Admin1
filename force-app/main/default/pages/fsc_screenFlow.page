@@ -1,29 +1,10 @@
-<apex:page id="fsc_screenFlow" showHeader="false" sidebar="false" lightningStylesheets="true">
-    <html>
-    <head>
-        <apex:includeLightning />
-    </head>
-    <body class="slds-scope">
-    <div id="fsc_screenFlow"/>
-    <script>
-        let statusChange = function (event) {
-            console.log('statusChange');
-            parent.postMessage({
-                flowStatus: event.getParam("status"),
-                flowParams: event.getParam("outputVariables"),
-                flowOrigin: "{!$CurrentPage.parameters.origin}"
-            }, "{!$CurrentPage.parameters.origin}");
-        };
-        $Lightning.use("c:fsc_screenFlowApp", function () {
-            // Create the flow component and set the onstatuschange attribute
-            $Lightning.createComponent("lightning:flow", {"onstatuschange": statusChange},
-                "fsc_screenFlow",
-                function (component) {
-                    component.startFlow("{!$CurrentPage.parameters.flowname}", {!$CurrentPage.parameters.params});
-                }
-            );
-        });
-    </script>
-    </body>
-    </html>
-</apex:page>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>New_Bot_Opp</members>
+        <members>New_Contact</members>
+        <members>WelcomeFlow</members>
+        <name>Flow</name>
+    </types>
+    <version>58.0</version>
+</Package>
